@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<title>Amicable Numbers</title>
+		<meta name=‘viewport’ content=“width=device-width, initial-scale=1”>
+	</head>
+	<body>
+		<form id="form1">
+  			<label for="num1">First Number:</label><br>
+  			<input type="text" id="num1" name="num1"><br/><br/>
+  			<label for="num2">Second Number:</label><br>
+  			<input type="text" id="num2" name="num2"><br/><br/>
+  			<input type="submit" value="Submit">
+		</form>
+		<!--
+		<p id="isFactor" onclick="isFactor(30,3)">Is the number a factor?</p>
+		<p id="showArray" onclick="showArray([1,2,3,4,5])">What values are in the array?</p>
+		<p id="addArray" onclick="addArray([1,2,3,4,5])">What is the sum of the array?</p>
+		<p id="getFactors" onclick="getFactors(30)">What are the possible factors of the number?</p>
+		-->
+		<script>
+			document.getElementById("form1").onsubmit = function() {displayResult()};
+			function displayResult () {
+				var num1 = document.getElementById('num1');
+				var num2 = document.getElementById('num2');
+				document.write('<div>First Number: ' + num1.value + '<br/>');
+				document.write('Second Number: ' + num2.value + '<br/>');
+				var possible_factors1 = getFactors(num1.value);
+				var possible_factors2 = getFactors(num2.value);
+				var factors1 = [];
+				var factors2 = [];
+				for (let i = 0; i < possible_factors1.length; i++) {
+					if (isFactor(num1.value, possible_factors1[i])) {
+						factors1.push(possible_factors1[i]);
+					}
+				}
+				for (let j = 0; j < possible_factors2.length; j++) {
+					if (isFactor(num2.value, possible_factors2[j])) {
+						factors2.push(possible_factors2[j]);
+					}
+				}
+				if (addArray(factors1) == num2.value && addArray(factors2) == num1.value) {
+					document.write('Amicable: Yes' + '</div>');
+				}
+				else {
+					document.write('Amicable: No' + '</div>');
+				}
+			}
+			function isFactor(num, factor) {
+				if (num % factor == 0) {
+					//document.getElementById("isFactor").innerHTML = "yes";
+					return true;
+				}
+				else {
+					//document.getElementById("isFactor").innerHTML = "no";
+					return false;
+				}
+			}
+			function showArray(arr) {
+				document.write('<div>');
+				for (let i = 0; i < arr.length; i++) {
+					document.write(arr[i] + ' ');
+				}
+				document.write('</div>');
+			}
+			function addArray(arr) {
+				var sum = 0;
+				for (let i = 0; i < arr.length; i++) {
+					sum += arr[i];
+				}
+				//document.getElementById("addArray").innerHTML = sum;
+				return sum;
+			}
+			function getFactors(num) {
+				var arr = [];
+				for (let i = 1; i <= (num/2); i++) {
+					arr.push(i);
+				}
+				//document.getElementById("getFactors").innerHTML = arr;
+				return arr;
+			}
+		</script>
+	</body>
+</html>
